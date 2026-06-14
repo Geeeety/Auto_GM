@@ -120,6 +120,10 @@
   background: #16a34a;
 }
 
+.status-dot.is-fallback {
+  background: #d97706;
+}
+
 .workspace {
   display: flex;
   flex-direction: column;
@@ -167,8 +171,32 @@
   white-space: nowrap;
 }
 
+.mode-chip.source-api {
+  border-color: #bbf7d0;
+  background: #f0fdf4;
+  color: #15803d;
+}
+
+.mode-chip.source-fallback {
+  border-color: #fde68a;
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.mode-chip.source-loading {
+  border-color: #dbeafe;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
 .icon-button {
   width: 38px;
+}
+
+.api-note {
+  margin: 8px 0 0;
+  color: #b45309;
+  font-size: 13px;
 }
 
 .page-grid {
@@ -233,8 +261,13 @@
 .metric-card {
   display: flex;
   gap: 12px;
+  min-width: 0;
   min-height: 112px;
   padding: 16px;
+}
+
+.metric-card > div:last-child {
+  min-width: 0;
 }
 
 .metric-icon {
@@ -250,8 +283,10 @@
   display: block;
   margin-top: 8px;
   color: #0f172a;
-  font-size: 24px;
+  font-size: clamp(20px, 2vw, 24px);
   line-height: 1.12;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .metric-card span {
@@ -278,6 +313,11 @@
 .tone-red .metric-icon {
   background: #fee2e2;
   color: #b91c1c;
+}
+
+.tone-neutral .metric-icon {
+  background: #e2e8f0;
+  color: #475569;
 }
 
 .chart-box {
@@ -316,12 +356,29 @@
 }
 
 .strategy-table.is-compact .strategy-row {
-  grid-template-columns: minmax(150px, 1fr) 90px 70px;
+  grid-template-columns: minmax(0, 1fr) max-content max-content;
+  gap: 8px;
+}
+
+.strategy-row > div {
+  min-width: 0;
+}
+
+.strategy-table.is-compact .badge {
+  min-width: 72px;
+  padding-inline: 8px;
+}
+
+.strategy-table.is-compact .profit,
+.strategy-table.is-compact .loss {
+  justify-self: end;
+  white-space: nowrap;
 }
 
 .strategy-row strong,
 .rule-card strong {
   color: #111827;
+  overflow-wrap: anywhere;
 }
 
 .strategy-row div span {
@@ -386,6 +443,10 @@
   color: #b45309;
 }
 
+.text-neutral {
+  color: #475569;
+}
+
 .account-strip {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -440,6 +501,16 @@
 .log-level.info {
   background: #dbeafe;
   color: #1d4ed8;
+}
+
+.log-level.debug {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.log-level.error {
+  background: #fee2e2;
+  color: #b91c1c;
 }
 
 @media (max-width: 1080px) {

@@ -1,0 +1,19 @@
+[project]
+name = "autogm-api"
+version = "0.1.0"
+description = "FastAPI service for the Auto_GM quant trading dashboard."
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-p no:cacheprovider"
+asyncio_default_fixture_loop_scope = "function"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true

@@ -1,4 +1,16 @@
 .codegraph
 .reasonix
-
+第一周规划.md
 PROJECT_PLAN.md
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / frontend
+node_modules/
+dist/
+.vite/

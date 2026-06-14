@@ -1,0 +1,156 @@
+import type { DashboardData } from './types'
+
+export const fallbackDashboardData: DashboardData = {
+  overview: {
+    cash: 63840,
+    equity: 102350,
+    daily_pnl: 850,
+    daily_pnl_percent: 0.84,
+    running_strategies: 2,
+    risk_status: 'normal',
+    data_completeness: 98.7,
+    metrics: [
+      {
+        key: 'equity',
+        label: '账户权益',
+        value: '$102,350',
+        meta: '现金 $63,840',
+        tone: 'green',
+      },
+      {
+        key: 'daily_pnl',
+        label: '今日盈亏',
+        value: '+$850',
+        meta: '+0.84%',
+        tone: 'green',
+      },
+      {
+        key: 'strategies',
+        label: '运行策略',
+        value: '2 个',
+        meta: '1 个回测中',
+        tone: 'blue',
+      },
+      {
+        key: 'risk',
+        label: '风控状态',
+        value: '正常',
+        meta: '1 条拦截记录',
+        tone: 'amber',
+      },
+    ],
+    equity_curve: [
+      { date: '06-14', equity: 100000, drawdown: 0 },
+      { date: '06-15', equity: 100680, drawdown: -0.2 },
+      { date: '06-16', equity: 100240, drawdown: -0.7 },
+      { date: '06-17', equity: 101180, drawdown: -0.1 },
+      { date: '06-18', equity: 101920, drawdown: 0 },
+      { date: '06-19', equity: 101460, drawdown: -0.5 },
+      { date: '06-20', equity: 102350, drawdown: 0 },
+    ],
+  },
+  market: {
+    symbol: 'BTC/USDT',
+    timeframe: '1h',
+    source: 'local-fallback',
+    bars: [
+      { time: '09:30', open: 101.2, close: 101.8, high: 102.1, low: 100.9, volume: 320 },
+      { time: '10:00', open: 101.8, close: 101.4, high: 102.0, low: 101.1, volume: 260 },
+      { time: '10:30', open: 101.4, close: 102.3, high: 102.6, low: 101.2, volume: 410 },
+      { time: '11:00', open: 102.3, close: 103.1, high: 103.3, low: 102.0, volume: 540 },
+      { time: '13:30', open: 103.1, close: 102.7, high: 103.4, low: 102.4, volume: 380 },
+      { time: '14:00', open: 102.7, close: 103.8, high: 104.0, low: 102.5, volume: 610 },
+      { time: '14:30', open: 103.8, close: 104.2, high: 104.5, low: 103.3, volume: 720 },
+    ],
+    quality: [
+      { label: '完整率', value: '98.7%', tone: 'green' },
+      { label: '重复时间', value: '0', tone: 'green' },
+      { label: '缺失区间', value: '2', tone: 'amber' },
+      { label: '异常价格', value: '0', tone: 'green' },
+    ],
+  },
+  strategies: {
+    active_strategy: '双均线趋势',
+    strategies: [
+      {
+        name: '双均线趋势',
+        market: 'BTC/USDT 1h',
+        status: 'running',
+        status_label: '运行中',
+        signal: '买入观察',
+        pnl: '+1.42%',
+        risk: 'normal',
+      },
+      {
+        name: 'RSI 均值回归',
+        market: 'ETH/USDT 4h',
+        status: 'idle',
+        status_label: '待启动',
+        signal: '无信号',
+        pnl: '+0.00%',
+        risk: 'normal',
+      },
+      {
+        name: '突破确认',
+        market: 'AAPL 1d',
+        status: 'backtesting',
+        status_label: '回测中',
+        signal: '观望',
+        pnl: '-0.18%',
+        risk: 'watch',
+      },
+    ],
+    parameters: [
+      { key: 'fast_window', value: '12', tone: 'blue' },
+      { key: 'slow_window', value: '48', tone: 'blue' },
+      { key: 'position_size', value: '25%', tone: 'amber' },
+      { key: 'stop_loss', value: '3%', tone: 'red' },
+    ],
+  },
+  backtest: {
+    strategy: '双均线趋势',
+    symbol: 'BTC/USDT',
+    timeframe: '1h',
+    initial_cash: 100000,
+    metrics: [
+      { name: '收益', value: 2.35, display_value: '+2.35%', tone: 'green' },
+      { name: '回撤', value: -0.92, display_value: '-0.92%', tone: 'red' },
+      { name: '胜率', value: 58.4, display_value: '58.4%', tone: 'blue' },
+      { name: '换手', value: 16.8, display_value: '16.8%', tone: 'amber' },
+    ],
+  },
+  risk: {
+    status: 'normal',
+    rules: [
+      { title: '最大单笔仓位', value: '25%', status: 'enabled', status_label: '启用' },
+      { title: '最大总仓位', value: '80%', status: 'enabled', status_label: '启用' },
+      { title: '最大日亏损', value: '2.5%', status: 'enabled', status_label: '启用' },
+      { title: '熔断开关', value: 'Ready', status: 'standby', status_label: '待命' },
+    ],
+    events: [
+      { time: '09:42:16', rule: '最大单笔仓位', result: '通过', level: 'ok' },
+      { time: '10:18:33', rule: '现金余额检查', result: '通过', level: 'ok' },
+      { time: '11:06:27', rule: '价格偏离检查', result: '拦截', level: 'danger' },
+      { time: '14:22:10', rule: '重复开仓检查', result: '通过', level: 'ok' },
+    ],
+  },
+  logs: {
+    logs: [
+      { time: '16:58:02', module: 'frontend', level: 'info', message: 'Dashboard shell rendered' },
+      { time: '16:58:04', module: 'api', level: 'info', message: 'Using local fallback data' },
+      {
+        time: '16:58:06',
+        module: 'risk',
+        level: 'warn',
+        message: 'One mock order blocked by price deviation',
+      },
+      {
+        time: '16:58:08',
+        module: 'system',
+        level: 'info',
+        message: 'Waiting for backend API integration',
+      },
+    ],
+  },
+}
+
